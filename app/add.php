@@ -1,6 +1,18 @@
 <?php
+
+session_start();
+
 include 'include/_header.php';
+include 'include/_function.php';
+include 'include/_config.php';
+
+generateToken();
+
 ?>
+
+
+<?= getHtmlErrors($errors) ?>
+<?= getHtmlMessages($messages) ?>
 
 <div class="container">
     <section class="card mb-4 rounded-3 shadow-sm">
@@ -8,7 +20,7 @@ include 'include/_header.php';
             <h1 class="my-0 fw-normal fs-4">Ajouter une opération</h1>
         </div>
         <div class="card-body">
-            <form>
+            <form action="action.php" method="post">
                 <div class="mb-3">
                     <label for="name" class="form-label">Nom de l'opération *</label>
                     <input type="text" class="form-control" name="name" id="name" placeholder="Facture d'électricité" required>
@@ -41,6 +53,7 @@ include 'include/_header.php';
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary btn-lg">Ajouter</button>
                 </div>
+                <input type="hidden" id="token" name="token" value="<?= $_SESSION['token'] ?>" />
             </form>
         </div>
     </section>
