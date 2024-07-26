@@ -2,94 +2,94 @@
 include 'include/_header.php';
 include 'include/_database.php';
 
-?>
+$query = $accounts->prepare("SELECT sum(amount) FROM `transaction`;");
+$query->execute();
+$result = $query->fetch();
 
-<div class="container">
-    <section class="card mb-4 rounded-3 shadow-sm">
-        <div class="card-header py-3">
-            <h2 class="my-0 fw-normal fs-4">Solde aujourd'hui</h2>
-        </div>
-        <div class="card-body">
-            <p class="card-title pricing-card-title text-center fs-1">625,34 €</p>
-        </div>
-    </section>
+echo '<div class="container">';
+echo '<section class="card mb-4 rounded-3 shadow-sm">';
+echo '<div class="card-header py-3">';
+echo '<h2 class="my-0 fw-normal fs-4">Solde aujourd\'hui</h2>';
+echo '</div>';
+echo '<div class="card-body">';
+echo '<p class="card-title pricing-card-title text-center fs-1">' . ($result['sum(amount)']) . ' €</p>';
+echo '</div>';
+echo '</section>';
 
-    <?php
+echo '<section class="card mb-4 rounded-3 shadow-sm">';
+echo '<div class="card-header py-3">';
+echo '<h1 class="my-0 fw-normal fs-4">Opérations de Juin 2023</h1>';
+echo '</div>';
+echo '<div class="card-body">';
+echo '<table class="table table-striped table-hover align-middle">';
+echo '<thead>';
+echo '<tr>';
+echo '<th scope="col" colspan="2">Opération</th>';
+echo '<th scope="col" class="text-end">Montant</th>';
+echo '<th scope="col" class="text-end">Actions</th>';
+echo '</tr>';
+echo '</thead>';
+echo '<tbody>';
 
-    echo '<section class="card mb-4 rounded-3 shadow-sm">';
-    echo '<div class="card-header py-3">';
-    echo '<h1 class="my-0 fw-normal fs-4">Opérations de Juin 2023</h1>';
-    echo '</div>';
-    echo '<div class="card-body">';
-    echo '<table class="table table-striped table-hover align-middle">';
-    echo '<thead>';
+$query = $accounts->prepare("SELECT * FROM `transaction` WHERE  MONTH(`date_transaction`) = 07 ORDER BY date_transaction DESC;");
+$query->execute();
+$result = $query->fetchAll();
+
+
+foreach ($result as $transaction) {
+
     echo '<tr>';
-    echo '<th scope="col" colspan="2">Opération</th>';
-    echo '<th scope="col" class="text-end">Montant</th>';
-    echo '<th scope="col" class="text-end">Actions</th>';
-    echo '</tr>';
-    echo '</thead>';
-    echo '<tbody>';
-
-    $query = $accounts->prepare("SELECT * FROM `transaction` WHERE  MONTH(`date_transaction`) = 07 ORDER BY date_transaction DESC;");
-    $query->execute();
-    $result = $query->fetchAll();
-
-
-    foreach ($result as $transaction) {
-
-        echo '<tr>';
-        echo '<td width="50" class="ps-3">';
-        echo '</td>';
-        echo '<td>';
-        echo '<time datetime="2023-07-10" class="d-block fst-italic fw-light">' . ($transaction['date_transaction']) . '</time>
+    echo '<td width="50" class="ps-3">';
+    echo '</td>';
+    echo '<td>';
+    echo '<time datetime="2023-07-10" class="d-block fst-italic fw-light">' . ($transaction['date_transaction']) . '</time>
             ' . ($transaction['name']) . '';
-        echo '</td>';
+    echo '</td>';
 
-        echo '<td class="text-end>';
-        echo '<span class="rounded-pill text-nowrap bg-warning-subtle px-2">' . ($transaction['amount']) . '</span>';
-        echo '</td>';
+    echo '<td class="text-end>';
+    echo '<span class="rounded-pill text-nowrap bg-warning-subtle px-2">' . ($transaction['amount']) . ' €</span>';
+    echo '</td>';
 
-        echo '<td class="text-end text-nowrap">';
-        echo '<a href="#" class="btn btn-outline-primary btn-sm rounded-circle">
+    echo '<td class="text-end text-nowrap">';
+    echo '<a href="#" class="btn btn-outline-primary btn-sm rounded-circle">
     <i class="bi bi-pencil"></i>
      </a>';
-        echo '<a href="#" class="btn btn-outline-danger btn-sm rounded-circle">
+    echo '<a href="#" class="btn btn-outline-danger btn-sm rounded-circle">
     <i class="bi bi-trash"></i>
     </a>';
-        echo '</td>';
-        echo '</tr>';
-    }
+    echo '</td>';
+    echo '</tr>';
+}
 
-    echo '</tbody>';
-    echo '</table>';
+echo '</tbody>';
+echo '</table>';
 
-    ?>
+?>
 
-    <tr>
-        <td width="50" class="ps-3">
-            <i class="bi bi-bandaid fs-3"></i>
-        </td>
-        <td>
-            <time datetime="2023-07-02" class="d-block fst-italic fw-light">2/07/2023</time>
-            Reboursement sécurité sociale
-        </td>
-        <td class="text-end">
-            <span class="rounded-pill text-nowrap bg-success-subtle px-2">
-                + 48,00 €
-            </span>
-        </td>
-        <td class="text-end text-nowrap">
-            <a href="#" class="btn btn-outline-primary btn-sm rounded-circle">
-                <i class="bi bi-pencil"></i>
-            </a>
-            <a href="#" class="btn btn-outline-danger btn-sm rounded-circle">
-                <i class="bi bi-trash"></i>
-            </a>
-        </td>
-    </tr>
-    </tbody>
-    </table>
+<tr>
+    <td width="50" class="ps-3">
+        <i class="bi bi-bandaid fs-3"></i>
+    </td>
+    <td>
+        <time datetime="2023-07-02" class="d-block fst-italic fw-light">2/07/2023</time>
+        Reboursement sécurité sociale
+    </td>
+    <td class="text-end">
+        <span class="rounded-pill text-nowrap bg-success-subtle px-2">
+            + 48,00 €
+        </span>
+    </td>
+    <td class="text-end text-nowrap">
+        <a href="#" class="btn btn-outline-primary btn-sm rounded-circle">
+            <i class="bi bi-pencil"></i>
+        </a>
+        <a href="#" class="btn btn-outline-danger btn-sm rounded-circle">
+            <i class="bi bi-trash"></i>
+        </a>
+    </td>
+</tr>
+</tbody>
+</table>
 
 
 </div>
