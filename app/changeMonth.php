@@ -1,7 +1,6 @@
 <?php
 include 'include/_header.php';
 include 'include/_database.php';
-
 ?>
 
 <div class="container">
@@ -31,7 +30,7 @@ include 'include/_database.php';
     echo '</thead>';
     echo '<tbody>';
 
-    $query = $accounts->prepare("SELECT * FROM `transaction` WHERE  MONTH(`date_transaction`) = 07 ORDER BY date_transaction DESC;");
+    $query = $accounts->prepare("SELECT * FROM `transaction` WHERE  MONTH(`date_transaction`) = 06 ORDER BY date_transaction DESC;");
     $query->execute();
     $result = $query->fetchAll();
 
@@ -43,7 +42,7 @@ include 'include/_database.php';
         echo '</td>';
         echo '<td>';
         echo '<time datetime="2023-07-10" class="d-block fst-italic fw-light">' . ($transaction['date_transaction']) . '</time>
-            ' . ($transaction['name']) . '';
+                ' . ($transaction['name']) . '';
         echo '</td>';
 
         echo '<td class="text-end>';
@@ -52,11 +51,11 @@ include 'include/_database.php';
 
         echo '<td class="text-end text-nowrap">';
         echo '<a href="#" class="btn btn-outline-primary btn-sm rounded-circle">
-    <i class="bi bi-pencil"></i>
-     </a>';
+        <i class="bi bi-pencil"></i>
+         </a>';
         echo '<a href="#" class="btn btn-outline-danger btn-sm rounded-circle">
-    <i class="bi bi-trash"></i>
-    </a>';
+        <i class="bi bi-trash"></i>
+        </a>';
         echo '</td>';
         echo '</tr>';
     }
@@ -65,32 +64,6 @@ include 'include/_database.php';
     echo '</table>';
 
     ?>
-
-    <tr>
-        <td width="50" class="ps-3">
-            <i class="bi bi-bandaid fs-3"></i>
-        </td>
-        <td>
-            <time datetime="2023-07-02" class="d-block fst-italic fw-light">2/07/2023</time>
-            Reboursement sécurité sociale
-        </td>
-        <td class="text-end">
-            <span class="rounded-pill text-nowrap bg-success-subtle px-2">
-                + 48,00 €
-            </span>
-        </td>
-        <td class="text-end text-nowrap">
-            <a href="#" class="btn btn-outline-primary btn-sm rounded-circle">
-                <i class="bi bi-pencil"></i>
-            </a>
-            <a href="#" class="btn btn-outline-danger btn-sm rounded-circle">
-                <i class="bi bi-trash"></i>
-            </a>
-        </td>
-    </tr>
-    </tbody>
-    </table>
-
 
 </div>
 <div class="card-footer">
@@ -102,10 +75,10 @@ include 'include/_database.php';
                 </span>
             </li>
             <li class="page-item active" aria-current="page">
-                <span class="page-link">Juillet 2023</span>
+                <span class="page-link">Juin 2023</span>
             </li>
             <li class="page-item">
-                <a class="page-link" href="changeMonth.php">Juin 2023</a>
+                <a class="page-link" href="changeMonth.php">Mai 2023</a>
             </li>
             <li class="page-item">
                 <span class="page-link">...</span>
