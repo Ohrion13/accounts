@@ -1,6 +1,7 @@
 <?php
 include 'include/_header.php';
 include 'include/_database.php';
+include 'include/_delete.php';
 
 $query = $accounts->prepare("SELECT sum(amount) FROM `transaction`;");
 $query->execute();
@@ -21,6 +22,8 @@ echo '<div class="card-header py-3">';
 echo '<h1 class="my-0 fw-normal fs-4">Opérations de Juin 2023</h1>';
 echo '</div>';
 echo '<div class="card-body">';
+echo getHtmlErrors($errors);
+echo getHtmlMessages($messages);
 echo '<table class="table table-striped table-hover align-middle">';
 echo '<thead>';
 echo '<tr>';
@@ -51,10 +54,10 @@ foreach ($result as $transaction) {
     echo '</td>';
 
     echo '<td class="text-end text-nowrap">';
-    echo '<a href="#" class="btn btn-outline-primary btn-sm rounded-circle">
+    echo '<a href="?action=modify&id=' . $transaction['id_transaction'] . '" class="btn btn-outline-primary btn-sm rounded-circle">
     <i class="bi bi-pencil"></i>
      </a>';
-    echo '<a href="#" class="btn btn-outline-danger btn-sm rounded-circle">
+    echo '<a href="?action=delete&id=' . $transaction['id_transaction'] . '" class="btn btn-outline-danger btn-sm rounded-circle">
     <i class="bi bi-trash"></i>
     </a>';
     echo '</td>';
@@ -80,10 +83,10 @@ echo '</table>';
         </span>
     </td>
     <td class="text-end text-nowrap">
-        <a href="#" class="btn btn-outline-primary btn-sm rounded-circle">
+        <a href="?action=modify&id=' . $transaction['id_transaction'] . '" class="btn btn-outline-primary btn-sm rounded-circle">
             <i class="bi bi-pencil"></i>
         </a>
-        <a href="#" class="btn btn-outline-danger btn-sm rounded-circle">
+        <a href="?action=delete&id=' . $transaction['id_transaction'] . '" class="btn btn-outline-danger btn-sm rounded-circle">
             <i class="bi bi-trash"></i>
         </a>
     </td>

@@ -1,6 +1,7 @@
 <?php
 include 'include/_header.php';
 include 'include/_database.php';
+include 'include/_delete.php';
 
 $query = $accounts->prepare("SELECT sum(amount) FROM `transaction`;");
 $query->execute();

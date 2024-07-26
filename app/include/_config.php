@@ -14,4 +14,5 @@ $errors = [
 
 $messages = [
     'insert_ok' => 'insertion réussie avec succès.',
+    'delete_ok' => 'suppression réussie avec succès.',
 ];

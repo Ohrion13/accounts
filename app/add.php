@@ -11,9 +11,6 @@ generateToken();
 ?>
 
 
-<?= getHtmlErrors($errors) ?>
-<?= getHtmlMessages($messages) ?>
-
 <div class="container">
     <section class="card mb-4 rounded-3 shadow-sm">
         <div class="card-header py-3">
@@ -55,6 +52,8 @@ generateToken();
                 </div>
                 <input type="hidden" id="token" name="token" value="<?= $_SESSION['token'] ?>" />
             </form>
+            <?= getHtmlErrors($errors) ?>
+            <?= getHtmlMessages($messages) ?>
         </div>
     </section>
 </div>
