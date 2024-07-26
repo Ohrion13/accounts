@@ -17,6 +17,8 @@ echo '<p class="card-title pricing-card-title text-center fs-1">' . ($result['su
 echo '</div>';
 echo '</section>';
 
+include 'include/_modify.php';
+
 echo '<section class="card mb-4 rounded-3 shadow-sm">';
 echo '<div class="card-header py-3">';
 echo '<h1 class="my-0 fw-normal fs-4">Opérations de Juin 2023</h1>';
